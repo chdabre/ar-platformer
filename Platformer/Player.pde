@@ -19,8 +19,8 @@ class Player {
     loadImage("jump_right.png")
   };
 
-  private int playerWidth = 26;
-  private int playerHeight = 32;
+  private int playerWidth = 39;
+  private int playerHeight = 48;
 
   private PVector position;
   private float xSpeed = 0;

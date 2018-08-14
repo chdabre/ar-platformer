@@ -31,9 +31,11 @@ class WorldObject { //<>//
 
     if (renderMode == RENDER_MODE_INGAME) {
       if (this.type == TYPE_PLATFORM) {
-        fill(255, 0, 0);//texture(platformTexture);
+        fill(152, 24, 25);
+        //texture(platformTexture);
       } else if (this.type == TYPE_DOOR) {
         fill(0, 0, 0);
+        texture(platformTexture);
       } else if (this.type == TYPE_END) {
         fill(0, 0, 255);
       } else if (this.type == TYPE_MARKER) {

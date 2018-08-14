@@ -1,3 +1,5 @@
+import mqtt.*;
+
 ArrayList<WorldObject> currentLevel = new ArrayList<WorldObject>();
 Player player;
 
@@ -5,27 +7,55 @@ int level = 0;
 
 int STATE_INGAME = 0;
 int STATE_EDIT   = 1;
+int STATE_STARTSCREEN = 2;
+int STATE_ENDSCREEN   = 3;
+int STATE_PASSWORD = 4;
 
-int state = 0;
+String[] stateNames = {
+  "INGAME",
+  "EDIT",
+  "STARTSCREEN",
+  "ENDSCREEN",
+  "PASSWORD"
+};
+
+int state = STATE_PASSWORD;
+String password = "mariomario";
+String passwordEntry = "";
 ArrayList<PVector> quadBounds;
 
-MarkerDetection markerDetection;
+//MarkerDetection markerDetection;
+String markerDetection;
 ArrayList<WorldObject> markerObjects;
+
+MQTTClient mqttClient;
+String commandTopic = "/argame/command";
+String stateTopic = "/argame/state";
 
 Settings settings;
 
 void setup() {
-  //size(800, 600, P3D);
-  fullScreen(P3D);
+  size(1280, 720, P3D);
+  //fullScreen(P3D);
   frameRate(60);
 
   settings = new Settings("settings.json");
 
-  markerDetection = new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
-  markerDetection.setPerspective(settings.getPerspectiveSettings());
+  markerDetection = "";// new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
+  //markerDetection.setPerspective(settings.getPerspectiveSettings());
 
   markerObjects = new ArrayList<WorldObject>();
 
+  mqttClient = new MQTTClient(this);
+  mqttClient.connect("mqtt://127.0.0.1:1883", "processing-argame");
+  mqttClient.subscribe(commandTopic);
+  mqttClient.publish(stateTopic, stateNames[state]);
+
+  setupGame();
+}
+
+void setupGame () {
+  level = 0;
   currentLevel = buildLevel0();
   quadBounds = null;
 }
@@ -33,9 +63,9 @@ void setup() {
 void draw() {
   background(255);
   fill(0);
-  
+
   if ( state == STATE_EDIT ) {
-    PImage currentFrame = markerDetection.getCorrectedFrame();
+    PImage currentFrame = null;//markerDetection.getCorrectedFrame();
     image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
     if (markerObjects.size() > 0){
@@ -45,7 +75,7 @@ void draw() {
     }
     markerObjects = new ArrayList<WorldObject>();
 
-    ArrayList<ArrayList> markers = markerDetection.detectMarkers(currentFrame);
+    ArrayList<ArrayList> markers = new ArrayList<ArrayList>(); //markerDetection.detectMarkers(currentFrame);
     if(markers.size() > 0){
       for(ArrayList<PVector> markerBounds : markers){
         WorldObject markerObject = new WorldObject(WorldObject.TYPE_MARKER, markerBounds, true);
@@ -54,8 +84,6 @@ void draw() {
       }
     }
   }
-
-  text(frameRate, 5, 20);
 
   for ( WorldObject obj : currentLevel ) {
     if ( state == STATE_EDIT ) {
@@ -81,23 +109,57 @@ void draw() {
     }
   } else if ( state == STATE_EDIT ) {
     player.render();
+  } else if ( state == STATE_STARTSCREEN ) {
+    PImage startScreen = loadImage("start_screen.png");
+    background(255);
+    image(startScreen, 0, 0, width, height);
+  } else if ( state == STATE_ENDSCREEN ) {
+    background(255);
+    PImage endScreen = loadImage("end_screen.png");
+    image(endScreen, 0, 0, width, height);
+  } else if ( state == STATE_PASSWORD) {
+    background(255);
+    PImage passwordScreen = loadImage("password_screen.png");
+    image(passwordScreen, 0, 0, width, height);
+
+    color(0);
+    textSize(40);
+    text(passwordEntry, 300, 425);
   } else {
     println("ERR: Invalid game state");
   }
   
+  color(255);
+  text(frameRate, 5, 20);
+  text(mouseX, 5, 40);
+  text(mouseY, 5, 60);
 }
 
 void keyPressed() {
-  if ( keyCode == UP) { 
-    player.jump();
+  if ( state == STATE_INGAME ) {
+    if ( keyCode == UP) { 
+      player.jump();
+    }
+
+    if ( keyCode == RIGHT) {
+      player.walk(Player.DIRECTION_RIGHT);
+    }
+
+    if ( keyCode == LEFT) {
+      player.walk(Player.DIRECTION_LEFT);
+    }
   }
 
-  if ( keyCode == RIGHT) {
-    player.walk(Player.DIRECTION_RIGHT);
-  }
+    if (state == STATE_PASSWORD) {
+    passwordEntry += key;
 
-  if ( keyCode == LEFT) {
-    player.walk(Player.DIRECTION_LEFT);
+    if (passwordEntry.length() == password.length()){
+      if (passwordEntry.toLowerCase().startsWith(password)) {
+        state = STATE_STARTSCREEN;
+        mqttClient.publish(stateTopic, stateNames[state]);
+      }
+      passwordEntry = "";
+    }
   }
 }
 
@@ -106,6 +168,9 @@ void keyReleased() {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
+  } else if (key == 's' && state == STATE_STARTSCREEN ) {
+    state = STATE_INGAME;
+    mqttClient.publish(stateTopic, stateNames[state]);
   }
 }
 
@@ -115,6 +180,7 @@ void toggleEditMode() {
   } else if ( state == STATE_EDIT) {
     state = STATE_INGAME;
   }
+  mqttClient.publish(stateTopic, stateNames[state]);
 }
 
 void levelUp() {
@@ -124,6 +190,20 @@ void levelUp() {
     currentLevel = buildLevel1();
   } else {
     println("no more levels");
+    state = STATE_ENDSCREEN;
+    mqttClient.publish(stateTopic, stateNames[state]);
+  }
+}
+
+void messageReceived(String topic, byte[] payload) {
+  println("new message: " + topic + " - " + new String(payload));
+
+  if (new String(payload).contains("RESET")) {
+    setupGame();
+    state = STATE_STARTSCREEN;
+  }
+  else if (new String(payload).contains("ACTIVATE")){
+    state = STATE_ENDSCREEN;
   }
 }
 

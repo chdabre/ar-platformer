@@ -10,8 +10,17 @@ class Player {
   public static final int STATE_JUMP_LEFT = 4; 
   public static final int STATE_JUMP_RIGHT = 5; 
 
-  private int playerWidth = 20;
-  private int playerHeight = 40;
+  private PImage[] stateImages = {
+    loadImage("default.png"),
+    loadImage("left.png"),
+    loadImage("walk_right.png"),
+    loadImage("walk_left.png"),
+    loadImage("jump_left.png"),
+    loadImage("jump_right.png")
+  };
+
+  private int playerWidth = 26;
+  private int playerHeight = 32;
 
   private PVector position;
   private float xSpeed = 0;
@@ -24,6 +33,8 @@ class Player {
   private int state = 0;
   private WorldObject collisionObject = null;
 
+  public boolean debug = false;
+
   public Player(PVector position) {
     this.position = position;
   }
@@ -33,17 +44,10 @@ class Player {
 
     fill(0, 255, 0);
     strokeWeight(2);
-    if (state == STATE_WALK_LEFT || state  == STATE_WALK_RIGHT) {
-      stroke(0);
-    } else if (state != STATE_DEFAULT && state != STATE_LEFT) {
-      stroke(255, 0, 0);
-    } else {
-      noStroke();
-    }
 
-    rect(this.position.x, this.position.y - this.playerHeight, this.playerWidth, this.playerHeight);
+    image(stateImages[state], this.position.x, this.position.y - this.playerHeight, this.playerWidth, this.playerHeight);
     fill(0);
-    text(this.position.x+","+this.position.y, this.position.x + playerWidth + 5, this.position.y);
+    if (debug) text(this.position.x+","+this.position.y, this.position.x + playerWidth + 5, this.position.y);
     popMatrix();
   }
 
@@ -149,10 +153,10 @@ class Player {
       fill(0, 0, 255);
       if (Collision.pointPolygon(bounds, (float)p.x, (float)p.y)) {
         fill(0, 255, 255);
-        ellipse(p.x, p.y, 2, 2);
+        if (debug) ellipse(p.x, p.y, 2, 2);
         return true;
       }
-      ellipse(p.x, p.y, 2, 2);
+      if (debug) ellipse(p.x, p.y, 2, 2);
     }
     return false;
   }

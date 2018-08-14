@@ -60,7 +60,7 @@ void setupGame () {
 }
 
 void draw() {
-  background(0);
+  background(200);
   fill(0);
 
   if ( state == STATE_EDIT ) {

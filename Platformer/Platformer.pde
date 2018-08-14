@@ -35,7 +35,7 @@ Settings settings;
 
 void setup() {
   //size(1280, 720, P3D);
-  fullScreen(P3D);
+  fullScreen(P2D);
   frameRate(60);
 
   settings = new Settings("settings.json");

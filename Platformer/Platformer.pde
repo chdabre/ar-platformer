@@ -46,7 +46,7 @@ void setup() {
   markerObjects = new ArrayList<WorldObject>();
 
   mqttClient = new MQTTClient(this);
-  mqttClient.connect("mqtt://127.0.0.1:1883", "processing-argame");
+  mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
 

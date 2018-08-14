@@ -137,7 +137,10 @@ class MarkerDetection{
         @returns: Four Corner Points
     */
     private ArrayList<PVector> getInitialPerspective(){
-        PImage camImage = cam.getFrame();
+        if (cam.available() == true) {
+            cam.read();
+        }
+        PImage camImage = cam;
 
         ArrayList<PVector> bounds = new ArrayList<PVector>();
 

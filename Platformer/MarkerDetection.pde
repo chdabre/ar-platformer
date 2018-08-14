@@ -36,7 +36,7 @@ class MarkerDetection{
         /* Initialize Camera */
         String[] cameras = Capture.list();
 
-        cam = new Capture(this, cameras[0]);
+        cam = new Capture(parent, cameras[0]);
         cam.start();
 
         /* Initialize Marker detection */

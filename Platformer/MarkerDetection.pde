@@ -45,6 +45,7 @@ class MarkerDetection{
             cam.setAutogain(true);
         }
         cam.setSharpness(255);
+        cam.setContrast(200);
 
         cam.start();
 

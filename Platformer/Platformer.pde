@@ -34,8 +34,8 @@ String stateTopic = "/argame/state";
 Settings settings;
 
 void setup() {
-  size(1280, 720, P3D);
-  //fullScreen(P3D);
+  //size(1280, 720, P3D);
+  fullScreen(P3D);
   frameRate(60);
 
   settings = new Settings("settings.json");

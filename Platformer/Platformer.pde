@@ -136,7 +136,7 @@ void draw() {
 
 void keyPressed() {
   if ( state == STATE_INGAME ) {
-    if ( keyCode == SPACE) { 
+    if ( keyCode == UP) { 
       player.jump();
     }
 
@@ -163,7 +163,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  if ( key == 'e' ) {
+  if ( key == 'r' ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();

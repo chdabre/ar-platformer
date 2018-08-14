@@ -65,6 +65,7 @@ class MarkerDetection{
         @returns: An ArrayList of the Bounding boxes (ArrayList<PVector>) of the found Markers
     */
     public ArrayList<ArrayList> detectMarkers(PImage frame){
+        frame.loadPixels();
         nya.detect(frame);
 
         ArrayList<ArrayList> markers = new ArrayList<ArrayList>();

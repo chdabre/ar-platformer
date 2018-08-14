@@ -33,19 +33,13 @@ String stateTopic = "/argame/state";
 
 Settings settings;
 
-boolean ready = false;
-
 void setup() {
   //size(1280, 720, P3D);
   fullScreen(P3D);
   frameRate(60);
 
   settings = new Settings("settings.json");
-  
-  thread("nbSetup");
-}
 
-void nbSetup() {
   new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
   markerDetection.setPerspective(settings.getPerspectiveSettings());
 
@@ -55,7 +49,7 @@ void nbSetup() {
   mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
-  
+
   setupGame();
 }
 
@@ -63,16 +57,13 @@ void setupGame () {
   level = 0;
   currentLevel = buildLevel0();
   quadBounds = null;
-
-  ready = true;
 }
 
 void draw() {
   background(255);
   fill(0);
 
-  if (ready) {
-    if ( state == STATE_EDIT ) {
+  if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();
     image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
@@ -141,12 +132,10 @@ void draw() {
   text(frameRate, 5, 20);
   text(mouseX, 5, 40);
   text(mouseY, 5, 60);
-  }
 }
 
 void keyPressed() {
-  if (ready) {
-if ( state == STATE_INGAME ) {
+  if ( state == STATE_INGAME ) {
     if ( keyCode == UP) { 
       player.jump();
     }
@@ -171,19 +160,16 @@ if ( state == STATE_INGAME ) {
       passwordEntry = "";
     }
   }
-  }
 }
 
 void keyReleased() {
-  if (ready) {
-   if ( key == 'e' ) {
+  if ( key == 'r' ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
   } else if (key == 's' && state == STATE_STARTSCREEN ) {
     state = STATE_INGAME;
     mqttClient.publish(stateTopic, stateNames[state]);
-  } 
   }
 }
 

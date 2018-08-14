@@ -33,6 +33,8 @@ String stateTopic = "/argame/state";
 
 Settings settings;
 
+boolean ready = false;
+
 void setup() {
   //size(1280, 720, P3D);
   fullScreen(P3D);
@@ -61,13 +63,16 @@ void setupGame () {
   level = 0;
   currentLevel = buildLevel0();
   quadBounds = null;
+
+  ready = true;
 }
 
 void draw() {
   background(255);
   fill(0);
 
-  if ( state == STATE_EDIT ) {
+  if (ready) {
+    if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();
     image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
@@ -136,10 +141,12 @@ void draw() {
   text(frameRate, 5, 20);
   text(mouseX, 5, 40);
   text(mouseY, 5, 60);
+  }
 }
 
 void keyPressed() {
-  if ( state == STATE_INGAME ) {
+  if (ready) {
+if ( state == STATE_INGAME ) {
     if ( keyCode == UP) { 
       player.jump();
     }
@@ -164,16 +171,19 @@ void keyPressed() {
       passwordEntry = "";
     }
   }
+  }
 }
 
 void keyReleased() {
-  if ( key == 'r' ) {
+  if (ready) {
+   if ( key == 'e' ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
   } else if (key == 's' && state == STATE_STARTSCREEN ) {
     state = STATE_INGAME;
     mqttClient.publish(stateTopic, stateNames[state]);
+  } 
   }
 }
 

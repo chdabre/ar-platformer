@@ -40,6 +40,10 @@ void setup() {
 
   settings = new Settings("settings.json");
 
+  thread("nbSetup");
+}
+
+void nbSetup() {
   new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
   markerDetection.setPerspective(settings.getPerspectiveSettings());
 

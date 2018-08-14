@@ -1,6 +1,5 @@
-/* PS3Eye for Camera Support */
-import com.thomasdiewald.ps3eye.PS3Eye;
-import com.thomasdiewald.ps3eye.PS3EyeP5;
+/* Capture Library for Webcam */
+import processing.video.*;
 
 /* NyARToolkit Processing library for Marker Detection */
 import jp.nyatla.nyar4psg.*;
@@ -22,7 +21,7 @@ import java.util.Arrays;
     The MarkerDetection class handles all Camera Input, Perspective Correction and detection of ARToolkit Markers.
 */
 class MarkerDetection{
-    PS3EyeP5 cam;
+    Capture cam;
     OpenCV opencv;
     MultiMarker nya;
 
@@ -35,17 +34,9 @@ class MarkerDetection{
 
     public MarkerDetection(PApplet parent, int gain, int lostDelay, boolean usePerspective){
         /* Initialize Camera */
-        cam = PS3EyeP5.getDevice(parent);
-        cam.init(60, PS3Eye.Resolution.VGA);
-        cam.waitAvailable(false);
+        String[] cameras = Capture.list();
 
-        if(gain != GAIN_AUTO){
-            cam.setGain(gain);
-        }else{
-            cam.setAutogain(true);
-        }
-        cam.setSharpness(255);
-
+        cam = new Capture(this, cameras[0]);
         cam.start();
 
         /* Initialize Marker detection */
@@ -83,7 +74,11 @@ class MarkerDetection{
         @returns: A Perspective-Corrected PImage.
     */
     public PImage getCorrectedFrame(){
-        PImage frame = cam.getFrame();
+        if (cam.available() == true) {
+            cam.read();
+        }
+        
+        PImage frame = cam; //new PImage(cam);
 
         /* Apply Perspective Transformation */
         if(usePerspective){

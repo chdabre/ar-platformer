@@ -41,8 +41,8 @@ void setup() {
 
   settings = new Settings("settings.json");
 
-  markerDetection = "";// new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
-  //markerDetection.setPerspective(settings.getPerspectiveSettings());
+  new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
+  markerDetection.setPerspective(settings.getPerspectiveSettings());
 
   markerObjects = new ArrayList<WorldObject>();
 
@@ -65,7 +65,7 @@ void draw() {
   fill(0);
 
   if ( state == STATE_EDIT ) {
-    PImage currentFrame = null;//markerDetection.getCorrectedFrame();
+    PImage currentFrame = markerDetection.getCorrectedFrame();
     image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
     if (markerObjects.size() > 0){
@@ -75,7 +75,7 @@ void draw() {
     }
     markerObjects = new ArrayList<WorldObject>();
 
-    ArrayList<ArrayList> markers = new ArrayList<ArrayList>(); //markerDetection.detectMarkers(currentFrame);
+    ArrayList<ArrayList> markers = markerDetection.detectMarkers(currentFrame);
     if(markers.size() > 0){
       for(ArrayList<PVector> markerBounds : markers){
         WorldObject markerObject = new WorldObject(WorldObject.TYPE_MARKER, markerBounds, true);

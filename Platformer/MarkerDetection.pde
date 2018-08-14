@@ -51,8 +51,8 @@ class MarkerDetection{
         /* Initialize Marker detection */
         nya = new MultiMarker(parent, width, height, "camera_zoomed.dat", NyAR4PsgConfig.CONFIG_PSG);
         nya.setLostDelay(lostDelay);
-        nya.addARMarker(loadImage("marker1.png"), 80);
-        nya.addARMarker(loadImage("marker2.png"), 80);
+        nya.addARMarker(loadImage("marker1.png"), 16, 10, 80);
+        nya.addARMarker(loadImage("marker2.png"), 16, 10, 80);
 
         /* Initialize perspective Correction */
         opencv = new OpenCV(parent, 640, 480);

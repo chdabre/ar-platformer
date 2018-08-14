@@ -226,7 +226,7 @@ ArrayList<WorldObject> buildLevel0() {
   ArrayList<PVector> floorBounds = new ArrayList<PVector>();
   floorBounds.add(new PVector(0, height));
   floorBounds.add(new PVector(width, height));
-  floorBounds.add(new PVector(width, height-20));
+  floorBounds.add(new PVector(width, height-120));
   floorBounds.add(new PVector(0, height-20));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, floorBounds, true));
 

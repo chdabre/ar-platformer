@@ -24,8 +24,7 @@ String password = "mariomario";
 String passwordEntry = "";
 ArrayList<PVector> quadBounds;
 
-//MarkerDetection markerDetection;
-String markerDetection;
+MarkerDetection markerDetection;
 ArrayList<WorldObject> markerObjects;
 
 MQTTClient mqttClient;

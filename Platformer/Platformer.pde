@@ -39,7 +39,7 @@ void setup() {
   frameRate(60);
 
   settings = new Settings("settings.json");
-
+  
   thread("nbSetup");
 }
 
@@ -53,7 +53,7 @@ void nbSetup() {
   mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
-
+  
   setupGame();
 }
 

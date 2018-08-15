@@ -9,6 +9,7 @@ class WorldObject { //<>//
   public static final int RENDER_MODE_EDIT   = 1;
 
   private PImage platformTexture = loadImage("textures/platform.jpg");
+  private PImage doorTexture = loadImage("textures/door.png");
 
   private int type = 0;
   private ArrayList<PVector> bounds;
@@ -35,9 +36,10 @@ class WorldObject { //<>//
         //texture(platformTexture);
       } else if (this.type == TYPE_DOOR) {
         fill(0, 0, 0);
-        texture(platformTexture);
+        texture(doorTexture);
       } else if (this.type == TYPE_END) {
         fill(0, 0, 255);
+        texture(doorTexture);
       } else if (this.type == TYPE_MARKER) {
         fill(152, 24, 25);
       } else if (this.type == TYPE_WALL) {

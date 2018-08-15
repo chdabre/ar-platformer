@@ -241,24 +241,17 @@ ArrayList<WorldObject> buildLevel0() {
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, floorBounds, true));
 
   ArrayList<PVector> platformBounds = new ArrayList<PVector>();
-  platformBounds.add(new PVector(400, 450));
-  platformBounds.add(new PVector(700, 450));
-  platformBounds.add(new PVector(200, 490));
-  platformBounds.add(new PVector(100, 490));
+  platformBounds.add(new PVector(600, 450));
+  platformBounds.add(new PVector(800, 450));
+  platformBounds.add(new PVector(800, 490));
+  platformBounds.add(new PVector(600, 490));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
-  ArrayList<PVector> platform2Bounds = new ArrayList<PVector>();
-  platform2Bounds.add(new PVector(400, 750));
-  platform2Bounds.add(new PVector(500, 750));
-  platform2Bounds.add(new PVector(500, 770));
-  platform2Bounds.add(new PVector(400, 770));
-  level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platform2Bounds, true));
-
   ArrayList<PVector> doorBounds = new ArrayList<PVector>();
-  doorBounds.add(new PVector(100, 400));
-  doorBounds.add(new PVector(120, 400));
-  doorBounds.add(new PVector(120, 450));
-  doorBounds.add(new PVector(100, 450));
+  doorBounds.add(new PVector(760, 400));
+  doorBounds.add(new PVector(800, 400));
+  doorBounds.add(new PVector(800, 450));
+  doorBounds.add(new PVector(760, 450));
   level.add(new WorldObject(WorldObject.TYPE_DOOR, doorBounds, false));
 
   player = new Player(new PVector(250, 200));

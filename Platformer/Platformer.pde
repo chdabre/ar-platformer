@@ -54,6 +54,7 @@ void setup() {
 
   bgImage = loadImage("bg.png");
 
+  println("Ready: " + width + "x" + height);
   setupGame();
 }
 
@@ -210,6 +211,9 @@ void messageReceived(String topic, byte[] payload) {
   if (new String(payload).contains("RESET")) {
     setupGame();
     state = STATE_PASSWORD;
+  } else if (new String(payload).contains("START")) {
+    setupGame();
+    state = STATE_STARTSCREEN;
   }
   else if (new String(payload).contains("ACTIVATE")){
     state = STATE_ENDSCREEN;

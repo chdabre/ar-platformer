@@ -33,6 +33,8 @@ String stateTopic = "/argame/state";
 
 Settings settings;
 
+PImage bgImage = null;
+
 void setup() {
   size(1280, 720, P3D);
   //fullScreen(P2D);
@@ -49,6 +51,8 @@ void setup() {
   mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
+
+  bgImage = loadImage("bg.png");
 
   setupGame();
 }
@@ -94,6 +98,7 @@ void draw() {
   }
 
   if ( state == STATE_INGAME ) {
+    image(bgImage, 0, 0, width, height);
     player.render();
 
     player.move(currentLevel);

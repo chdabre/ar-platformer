@@ -65,7 +65,7 @@ void draw() {
 
   if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();
-    image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
+    //image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
     if (markerObjects.size() > 0){
       for(WorldObject markerObject : markerObjects ){
@@ -129,9 +129,9 @@ void draw() {
   }
   
   color(255);
-  text(frameRate, 5, 20);
-  text(mouseX, 5, 40);
-  text(mouseY, 5, 60);
+  // text(frameRate, 5, 20);
+  // text(mouseX, 5, 40);
+  // text(mouseY, 5, 60);
 }
 
 void keyPressed() {

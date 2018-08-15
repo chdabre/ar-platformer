@@ -39,7 +39,7 @@ class WorldObject { //<>//
       } else if (this.type == TYPE_END) {
         fill(0, 0, 255);
       } else if (this.type == TYPE_MARKER) {
-        fill(255, 0, 255);
+        fill(152, 24, 25);
       } else if (this.type == TYPE_WALL) {
         noFill();
       } else {

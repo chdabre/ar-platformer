@@ -248,8 +248,8 @@ ArrayList<WorldObject> buildLevel0() {
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
   ArrayList<PVector> doorBounds = new ArrayList<PVector>();
-  doorBounds.add(new PVector(760, 400));
-  doorBounds.add(new PVector(800, 400));
+  doorBounds.add(new PVector(760, 380));
+  doorBounds.add(new PVector(800, 380));
   doorBounds.add(new PVector(800, 450));
   doorBounds.add(new PVector(760, 450));
   level.add(new WorldObject(WorldObject.TYPE_DOOR, doorBounds, false));

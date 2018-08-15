@@ -200,7 +200,7 @@ void messageReceived(String topic, byte[] payload) {
 
   if (new String(payload).contains("RESET")) {
     setupGame();
-    state = STATE_STARTSCREEN;
+    state = STATE_PASSWORD;
   }
   else if (new String(payload).contains("ACTIVATE")){
     state = STATE_ENDSCREEN;

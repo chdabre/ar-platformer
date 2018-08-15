@@ -241,10 +241,10 @@ ArrayList<WorldObject> buildLevel0() {
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, floorBounds, true));
 
   ArrayList<PVector> platformBounds = new ArrayList<PVector>();
-  platformBounds.add(new PVector(100, 450));
-  platformBounds.add(new PVector(200, 450));
-  platformBounds.add(new PVector(200, 470));
-  platformBounds.add(new PVector(100, 470));
+  platformBounds.add(new PVector(400, 450));
+  platformBounds.add(new PVector(700, 450));
+  platformBounds.add(new PVector(200, 490));
+  platformBounds.add(new PVector(100, 490));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
   ArrayList<PVector> platform2Bounds = new ArrayList<PVector>();

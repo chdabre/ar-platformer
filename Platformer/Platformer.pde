@@ -62,6 +62,7 @@ void setupGame () {
 void draw() {
   background(255);
   fill(0);
+  noStroke();
 
   if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();

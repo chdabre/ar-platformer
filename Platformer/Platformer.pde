@@ -68,6 +68,11 @@ void draw() {
   fill(0);
   noStroke();
 
+  if (state == STATE_INGAME ) {
+    // Draw bg image
+    image(bgImage, 0, 0, width, height);
+  }
+
   if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();
     //image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
@@ -98,7 +103,6 @@ void draw() {
   }
 
   if ( state == STATE_INGAME ) {
-    image(bgImage, 0, 0, width, height);
     player.render();
 
     player.move(currentLevel);

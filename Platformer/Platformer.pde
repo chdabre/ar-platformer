@@ -40,7 +40,7 @@ void setup() {
 
   settings = new Settings("settings.json");
 
-  markerDetection = new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 5, true);
+  markerDetection = new MarkerDetection(this, MarkerDetection.GAIN_AUTO, 50, true);
   markerDetection.setPerspective(settings.getPerspectiveSettings());
 
   markerObjects = new ArrayList<WorldObject>();

@@ -51,7 +51,7 @@ class WorldObject { //<>//
       stroke(0);
       strokeWeight(1);
       if (this.type == TYPE_MARKER) {
-        fill(152, 24, 25);
+        stroke(180, 24, 25);
         strokeWeight(1);
       }
     }else{

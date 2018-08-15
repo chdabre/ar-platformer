@@ -50,7 +50,7 @@ class MarkerDetection{
         cam.start();
 
         /* Initialize Marker detection */
-        nya = new MultiMarker(parent, width, height, "camera_zoomed.dat", NyAR4PsgConfig.CONFIG_PSG);
+        nya = new MultiMarker(parent, width, height, "/home/arbasel/sketchbook/libraries/nyar4psg/data/camera_para.dat", NyAR4PsgConfig.CONFIG_PSG);
         nya.setLostDelay(lostDelay);
         nya.addARMarker(loadImage("marker1.png"), 32, 5, 100);
         nya.addARMarker(loadImage("marker2.png"), 32, 5, 100);

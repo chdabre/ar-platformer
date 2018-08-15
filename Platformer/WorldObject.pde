@@ -51,8 +51,8 @@ class WorldObject { //<>//
       stroke(0);
       strokeWeight(1);
       if (this.type == TYPE_MARKER) {
-        stroke(255, 0, 0);
-        strokeWeight(2);
+        fill(152, 24, 25);
+        strokeWeight(1);
       }
     }else{
       println("ERR: Invalid Render Mode");

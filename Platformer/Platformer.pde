@@ -33,7 +33,18 @@ String stateTopic = "/argame/state";
 
 Settings settings;
 
-PImage bgImage = null;
+int htpPos = 0;
+PImage htp[] = {
+  loadImage("htp_01.png"),
+  loadImage("htp_02.png"),
+  loadImage("htp_03.png"),
+  loadImage("htp_04.png"),
+};
+
+PImage endScreen = loadImage("end_screen.png");
+PImage passwordScreen = loadImage("password_screen.png");
+PImage bgImage = loadImage("bg.png");
+PImage editImage = loadImage("edit.png");
 
 void setup() {
   size(1280, 720, P3D);
@@ -52,14 +63,13 @@ void setup() {
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
 
-  bgImage = loadImage("bg.png");
-
   println("Ready: " + width + "x" + height);
   setupGame();
 }
 
 void setupGame () {
   level = 0;
+  htpPos = 0;
   currentLevel = buildLevel0();
   quadBounds = null;
 }
@@ -77,6 +87,8 @@ void draw() {
   if ( state == STATE_EDIT ) {
     PImage currentFrame = markerDetection.getCorrectedFrame();
     //image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
+
+    image(editImage, 0, 0, width, height);
 
     if (markerObjects.size() > 0){
       for(WorldObject markerObject : markerObjects ){
@@ -120,16 +132,13 @@ void draw() {
   } else if ( state == STATE_EDIT ) {
     player.render();
   } else if ( state == STATE_STARTSCREEN ) {
-    PImage startScreen = loadImage("start_screen.png");
     background(255);
-    image(startScreen, 0, 0, width, height);
+    image(htp[htpPos], 0, 0, width, height);
   } else if ( state == STATE_ENDSCREEN ) {
     background(255);
-    PImage endScreen = loadImage("end_screen.png");
     image(endScreen, 0, 0, width, height);
   } else if ( state == STATE_PASSWORD) {
     background(255);
-    PImage passwordScreen = loadImage("password_screen.png");
     image(passwordScreen, 0, 0, width, height);
 
     color(0);
@@ -179,8 +188,12 @@ void keyReleased() {
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
   } else if (key == 's' && state == STATE_STARTSCREEN ) {
-    state = STATE_INGAME;
-    mqttClient.publish(stateTopic, stateNames[state]);
+    if (htpPos < 4) {
+      htpPos++;  
+    } else {
+      state = STATE_INGAME;
+      mqttClient.publish(stateTopic, stateNames[state]);
+    }
   }
 }
 

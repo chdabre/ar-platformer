@@ -138,7 +138,9 @@ void draw() {
     player.render();
   } else if ( state == STATE_STARTSCREEN ) {
     background(255);
-    image(htp[htpPos], 0, 0, width, height);
+    if(htpPos < 4) {
+      image(htp[htpPos], 0, 0, width, height);
+    }
   } else if ( state == STATE_ENDSCREEN ) {
     background(255);
     image(endScreen, 0, 0, width, height);

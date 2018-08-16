@@ -34,7 +34,7 @@ String stateTopic = "/argame/state";
 Settings settings;
 
 int htpPos = 0;
-PImage htp[];
+PImage htp[4];
 
 PImage endScreen;
 PImage passwordScreen;
@@ -58,13 +58,11 @@ void setup() {
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
 
-  htp = {
-    loadImage("htp_01.png"),
-    loadImage("htp_02.png"),
-    loadImage("htp_03.png"),
-    loadImage("htp_04.png"),
-  };
-  
+  htp[0] = loadImage("htp_01.png");
+  htp[1] = loadImage("htp_02.png");
+  htp[2] = loadImage("htp_03.png");
+  htp[3] = loadImage("htp_04.png");
+
   endScreen = loadImage("end_screen.png");
   passwordScreen = loadImage("password_screen.png");
   bgImage = loadImage("bg.png");

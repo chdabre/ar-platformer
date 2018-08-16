@@ -193,7 +193,7 @@ void keyReleased() {
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
   } else if (key == 's' && state == STATE_STARTSCREEN ) {
-    if (htpPos < 4) {
+    if (htpPos <= 3) {
       htpPos++;  
     } else {
       state = STATE_INGAME;

@@ -34,7 +34,7 @@ String stateTopic = "/argame/state";
 Settings settings;
 
 int htpPos = 0;
-PImage htp[4];
+PImage[] htp = new PImage[4];
 
 PImage endScreen;
 PImage passwordScreen;

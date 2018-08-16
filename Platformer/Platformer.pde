@@ -34,17 +34,12 @@ String stateTopic = "/argame/state";
 Settings settings;
 
 int htpPos = 0;
-PImage htp[] = {
-  loadImage("htp_01.png"),
-  loadImage("htp_02.png"),
-  loadImage("htp_03.png"),
-  loadImage("htp_04.png"),
-};
+PImage htp[];
 
-PImage endScreen = loadImage("end_screen.png");
-PImage passwordScreen = loadImage("password_screen.png");
-PImage bgImage = loadImage("bg.png");
-PImage editImage = loadImage("edit.png");
+PImage endScreen;
+PImage passwordScreen;
+PImage bgImage;
+PImage editImage;
 
 void setup() {
   size(1280, 720, P3D);
@@ -62,6 +57,18 @@ void setup() {
   mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
+
+  htp = {
+    loadImage("htp_01.png"),
+    loadImage("htp_02.png"),
+    loadImage("htp_03.png"),
+    loadImage("htp_04.png"),
+  };
+  
+  endScreen = loadImage("end_screen.png");
+  passwordScreen = loadImage("password_screen.png");
+  bgImage = loadImage("bg.png");
+  editImage = loadImage("edit.png");
 
   println("Ready: " + width + "x" + height);
   setupGame();

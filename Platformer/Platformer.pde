@@ -218,6 +218,8 @@ void messageReceived(String topic, byte[] payload) {
   else if (new String(payload).contains("ACTIVATE")){
     state = STATE_ENDSCREEN;
   }
+
+  mqttClient.publish(stateTopic, stateNames[state]);
 }
 
 ArrayList<WorldObject> buildLevel0() {

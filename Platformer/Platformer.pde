@@ -230,6 +230,7 @@ void messageReceived(String topic, byte[] payload) {
 
   if (new String(payload).contains("RESET")) {
     setupGame();
+    passwordEntry = "";
     state = STATE_PASSWORD;
   } else if (new String(payload).contains("START")) {
     setupGame();

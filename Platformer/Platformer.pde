@@ -41,6 +41,8 @@ PImage passwordScreen;
 PImage bgImage;
 PImage editImage;
 
+int keepAwakeTime = millis();
+
 void setup() {
   size(1280, 720, P3D);
   //fullScreen(P2D);
@@ -159,6 +161,11 @@ void draw() {
   // text(frameRate, 5, 20);
   // text(mouseX, 5, 40);
   // text(mouseY, 5, 60);
+
+  if (millis() > keepAwakeTime + 10000)
+  {
+    exec("DISPLAY=:0 /usr/bin/xset dpms force on")
+  }
 }
 
 void keyPressed() {

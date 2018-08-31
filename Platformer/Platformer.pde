@@ -178,7 +178,7 @@ void keyPressed() {
     }
   }
 
-    if (state == STATE_PASSWORD) {
+  if (state == STATE_PASSWORD && "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".indexOf(key.toUpperCase()) > -1) {
     passwordEntry += key;
 
     if (passwordEntry.length() == password.length()){
@@ -188,6 +188,10 @@ void keyPressed() {
       }
       passwordEntry = "";
     }
+  }
+
+  if (state == STATE_PASSWORD && key == BACKSPACE) {
+    passwordEntry = passwordEntry.substring( 0, passwordEntry.length()-1 );
   }
 }
 

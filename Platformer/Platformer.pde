@@ -178,7 +178,7 @@ void keyPressed() {
     }
   }
 
-  if (state == STATE_PASSWORD && "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".indexOf(key.toUpperCase()) > -1) {
+  if (state == STATE_PASSWORD && "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".indexOf((""+key).toUpperCase()) > -1) {
     passwordEntry += key;
 
     if (passwordEntry.length() == password.length()){

@@ -190,7 +190,7 @@ void keyPressed() {
     }
   }
 
-  if (state == STATE_PASSWORD && key == BACKSPACE) {
+  if (state == STATE_PASSWORD && key == BACKSPACE && passwordEntry.length()>0) {
     passwordEntry = passwordEntry.substring( 0, passwordEntry.length()-1 );
   }
 }

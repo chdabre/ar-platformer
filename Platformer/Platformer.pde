@@ -164,6 +164,11 @@ void draw() {
 }
 
 void keyPressed() {
+  // Prevent ESC key from closing the sketch
+  if (keyCode == 27) {
+    key = 0;
+  }
+
   if ( state == STATE_INGAME ) {
     if ( keyCode == UP) { 
       player.jump();

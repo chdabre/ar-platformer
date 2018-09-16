@@ -201,12 +201,13 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  println(key);
-  if ( key.toLowerCase() == 'r' ) {
+  String keyIn = ("" + key).toLowerCase();
+
+  if ( keyIn == 'r' ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
-  } else if (key.toLowerCase() == 's' && state == STATE_STARTSCREEN ) {
+  } else if (keyIn == 's' && state == STATE_STARTSCREEN ) {
     if (htpPos < 3) {
       htpPos++;  
     } else {

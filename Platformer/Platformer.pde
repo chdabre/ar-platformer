@@ -202,7 +202,7 @@ void keyPressed() {
 
 void keyReleased() {
   String keyIn = str(key).toLowerCase();
-  println(keyIn)
+  println(keyIn);
   if ( keyIn == "r" ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {

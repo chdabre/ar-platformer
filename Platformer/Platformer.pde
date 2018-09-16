@@ -201,6 +201,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
+  println(key);
   if ( key == 'r' ) {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {

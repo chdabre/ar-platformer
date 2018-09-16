@@ -201,7 +201,7 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  String keyIn = ("" + key).toLowerCase();
+  String keyIn = str(key).toLowerCase();
 
   if ( keyIn == 'r' ) {
     toggleEditMode();

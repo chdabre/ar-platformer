@@ -34,7 +34,7 @@ String stateTopic = "/argame/state";
 Settings settings;
 
 int htpPos = 0;
-PImage[] htp = new PImage[4];
+PImage[] htp = new PImage[3];
 
 PImage endScreen;
 PImage passwordScreen;
@@ -63,7 +63,6 @@ void setup() {
   htp[0] = loadImage("htp_01.png");
   htp[1] = loadImage("htp_02.png");
   htp[2] = loadImage("htp_03.png");
-  htp[3] = loadImage("htp_04.png");
 
   endScreen = loadImage("end_screen.png");
   passwordScreen = loadImage("password_screen.png");
@@ -208,7 +207,7 @@ void keyReleased() {
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
   } else if (keyIn.equals("s") && state == STATE_STARTSCREEN ) {
-    if (htpPos < 3) {
+    if (htpPos < 2) {
       htpPos++;  
     } else {
       state = STATE_INGAME;

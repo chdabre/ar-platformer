@@ -56,9 +56,7 @@ void setup() {
   markerObjects = new ArrayList<WorldObject>();
 
   mqttClient = new MQTTClient(this);
-  mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
-  mqttClient.subscribe(commandTopic);
-  mqttClient.publish(stateTopic, stateNames[state]);
+  mqttReconnect();
 
   htp[0] = loadImage("htp_01.png");
   htp[1] = loadImage("htp_02.png");
@@ -78,6 +76,12 @@ void setupGame () {
   htpPos = 0;
   currentLevel = buildLevel0();
   quadBounds = null;
+}
+
+void mqttReconnect() {
+  mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
+  mqttClient.subscribe(commandTopic);
+  mqttClient.publish(stateTopic, stateNames[state]);
 }
 
 void draw() {
@@ -160,6 +164,10 @@ void draw() {
   // text(frameRate, 5, 20);
   // text(mouseX, 5, 40);
   // text(mouseY, 5, 60);
+
+  if (!mqttClient.isConnected()) {
+    mqttReconnect();
+  }
 }
 
 void keyPressed() {

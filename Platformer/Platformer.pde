@@ -12,10 +12,10 @@ int STATE_ENDSCREEN   = 3;
 int STATE_PASSWORD = 4;
 
 String[] stateNames = {
-  "INGAME",
-  "EDIT",
-  "STARTSCREEN",
-  "ENDSCREEN",
+  "INGAME", 
+  "EDIT", 
+  "STARTSCREEN", 
+  "ENDSCREEN", 
   "PASSWORD"
 };
 
@@ -100,16 +100,16 @@ void draw() {
 
     image(editImage, 0, 0, width, height);
 
-    if (markerObjects.size() > 0){
-      for(WorldObject markerObject : markerObjects ){
+    if (markerObjects.size() > 0) {
+      for (WorldObject markerObject : markerObjects ) {
         currentLevel.remove(markerObject);
       }
     }
     markerObjects = new ArrayList<WorldObject>();
 
     ArrayList<ArrayList> markers = markerDetection.detectMarkers(currentFrame);
-    if(markers.size() > 0){
-      for(ArrayList<PVector> markerBounds : markers){
+    if (markers.size() > 0) {
+      for (ArrayList<PVector> markerBounds : markers) {
         WorldObject markerObject = new WorldObject(WorldObject.TYPE_MARKER, markerBounds, true);
         markerObjects.add(markerObject);
         currentLevel.add(markerObject);
@@ -143,7 +143,7 @@ void draw() {
     player.render();
   } else if ( state == STATE_STARTSCREEN ) {
     background(255);
-    if(htpPos < 4) {
+    if (htpPos < 4) {
       image(htp[htpPos], 0, 0, width, height);
     }
   } else if ( state == STATE_ENDSCREEN ) {
@@ -159,16 +159,16 @@ void draw() {
   } else {
     println("ERR: Invalid game state");
   }
-  
+
   color(255);
   // text(frameRate, 5, 20);
   // text(mouseX, 5, 40);
   // text(mouseY, 5, 60);
-  
-  if (!mqttClient.client.isConnected()) {
-    println("LOST CONNECTION... RECONNECT ATTEMPT");
-    mqttReconnect();
-  }
+
+  //if (!mqttClient.client.isConnected()) {
+  //  println("LOST CONNECTION... RECONNECT ATTEMPT");
+  //  mqttReconnect();
+  //}
 }
 
 void keyPressed() {
@@ -194,7 +194,7 @@ void keyPressed() {
   if (state == STATE_PASSWORD && "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".indexOf((""+key).toUpperCase()) > -1) {
     passwordEntry += key;
 
-    if (passwordEntry.length() == password.length()){
+    if (passwordEntry.length() == password.length()) {
       if (passwordEntry.toLowerCase().startsWith(password)) {
         state = STATE_STARTSCREEN;
         mqttClient.publish(stateTopic, stateNames[state]);
@@ -217,7 +217,7 @@ void keyReleased() {
     player.stop();
   } else if (keyIn.equals("s") && state == STATE_STARTSCREEN ) {
     if (htpPos < 2) {
-      htpPos++;  
+      htpPos++;
     } else {
       state = STATE_INGAME;
       mqttClient.publish(stateTopic, stateNames[state]);
@@ -256,8 +256,7 @@ void messageReceived(String topic, byte[] payload) {
   } else if (new String(payload).contains("START")) {
     setupGame();
     state = STATE_STARTSCREEN;
-  }
-  else if (new String(payload).contains("ACTIVATE")){
+  } else if (new String(payload).contains("ACTIVATE")) {
     state = STATE_ENDSCREEN;
   }
 

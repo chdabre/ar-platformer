@@ -257,7 +257,6 @@ void messageReceived(String topic, byte[] payload) {
   }
 
   mqttClient.publish(stateTopic, stateNames[state]);
-  mqttClient.
 }
 
 ArrayList<WorldObject> buildLevel0() {

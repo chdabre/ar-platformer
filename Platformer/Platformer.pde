@@ -203,6 +203,7 @@ void keyPressed() {
   }
   
   if (!mqttClient.client.isConnected()) {
+    println("LOST CONNECTION... RECONNECT ATTEMPT");
     mqttReconnect();
   }
 }

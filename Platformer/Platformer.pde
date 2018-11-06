@@ -27,7 +27,7 @@ ArrayList<PVector> quadBounds;
 MarkerDetection markerDetection;
 ArrayList<WorldObject> markerObjects;
 
-MQTTClient mqttClient;
+MQTTClientReconnect mqttClient;
 String commandTopic = "/argame/command";
 String stateTopic = "/argame/state";
 
@@ -55,7 +55,7 @@ void setup() {
 
   markerObjects = new ArrayList<WorldObject>();
 
-  mqttClient = new MQTTClient(this);
+  mqttClient = new MQTTClientReconnect(this);
   mqttReconnect();
 
   htp[0] = loadImage("htp_01.png");
@@ -164,10 +164,6 @@ void draw() {
   // text(frameRate, 5, 20);
   // text(mouseX, 5, 40);
   // text(mouseY, 5, 60);
-
-  if (!mqttClient.isConnected()) {
-    mqttReconnect();
-  }
 }
 
 void keyPressed() {
@@ -261,6 +257,7 @@ void messageReceived(String topic, byte[] payload) {
   }
 
   mqttClient.publish(stateTopic, stateNames[state]);
+  mqttClient.
 }
 
 ArrayList<WorldObject> buildLevel0() {
@@ -357,4 +354,17 @@ ArrayList<PVector> randomQuad() {
   }
 
   return quad;
+}
+
+class MQTTClientReconnect extends MQTTClient {
+  public MQTTClientReconnect(PApplet parent) {
+    super(parent);
+  }
+  
+  @Override
+  public void connectionLost(Throwable throwable) {
+    System.out.println("[MQTT] lost connection!" + throwable.getMessage());
+    
+    client.reconnect();
+  }
 }

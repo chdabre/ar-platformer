@@ -164,6 +164,11 @@ void draw() {
   // text(frameRate, 5, 20);
   // text(mouseX, 5, 40);
   // text(mouseY, 5, 60);
+  
+  if (!mqttClient.client.isConnected()) {
+    println("LOST CONNECTION... RECONNECT ATTEMPT");
+    mqttReconnect();
+  }
 }
 
 void keyPressed() {
@@ -200,11 +205,6 @@ void keyPressed() {
 
   if (state == STATE_PASSWORD && key == BACKSPACE && passwordEntry.length()>0) {
     passwordEntry = passwordEntry.substring( 0, passwordEntry.length()-1 );
-  }
-  
-  if (!mqttClient.client.isConnected()) {
-    println("LOST CONNECTION... RECONNECT ATTEMPT");
-    mqttReconnect();
   }
 }
 

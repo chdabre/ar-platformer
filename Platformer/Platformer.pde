@@ -73,7 +73,7 @@ void setup() {
 
 void connectionLost() {
   println("connection lost");
-  exec("bin/sh", "/home/arbasel/startup.sh")
+  exec("bin/sh", "/home/arbasel/startup.sh");
 }
 
 void setupGame () {

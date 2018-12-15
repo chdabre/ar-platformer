@@ -75,7 +75,8 @@ void setup() {
 
 void connectionLost() {
   println("connection lost");
-  exec("/bin/sh", "/home/arbasel/startup.sh");
+  mqttReconnect();
+  //exec("/bin/sh", "/home/arbasel/startup.sh");
 }
 
 void setupGame () {

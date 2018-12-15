@@ -71,6 +71,11 @@ void setup() {
   setupGame();
 }
 
+void connectionLost() {
+  println("connection lost");
+  exec("bin/sh", "/home/arbasel/startup.sh")
+}
+
 void setupGame () {
   level = 0;
   htpPos = 0;

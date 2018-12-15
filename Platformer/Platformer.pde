@@ -43,6 +43,8 @@ PImage editImage;
 
 int keepAwakeTime = millis();
 
+boolean connected = false;
+
 void setup() {
   size(1280, 720, P3D);
   //fullScreen(P2D);
@@ -87,6 +89,10 @@ void mqttReconnect() {
   mqttClient.connect("mqtt://192.168.100.40:1883", "processing-argame");
   mqttClient.subscribe(commandTopic);
   mqttClient.publish(stateTopic, stateNames[state]);
+}
+
+void clientConnected() {
+  connected = true;
 }
 
 void draw() {
@@ -174,6 +180,10 @@ void draw() {
   //  println("LOST CONNECTION... RECONNECT ATTEMPT");
   //  mqttReconnect();
   //}
+
+  if ( millis() > 10000 && !connected ) {
+    connectionLost();
+  } 
 }
 
 void keyPressed() {

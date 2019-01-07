@@ -221,6 +221,10 @@ void keyReleased() {
     toggleEditMode();
   } else if ( keyCode == LEFT || keyCode == RIGHT) {
     player.stop();
+  } else if (keyIn.equals("s") && (state == STATE_INGAME || state == STATE_EDIT) ) {
+    htpPos = 0;
+    state = STATE_STARTSCREEN;
+    mqttClient.publish(stateTopic, stateNames[state]);
   } else if (keyIn.equals("s") && state == STATE_STARTSCREEN ) {
     if (htpPos < 2) {
       htpPos++;

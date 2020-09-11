@@ -341,10 +341,10 @@ ArrayList<WorldObject> buildLevel1() {
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, floorBounds, true));
 
   ArrayList<PVector> platformBounds = new ArrayList<PVector>();
-  platformBounds.add(new PVector(400, 430));
-  platformBounds.add(new PVector(500, 430));
-  platformBounds.add(new PVector(500, 450));
-  platformBounds.add(new PVector(400, 450));
+  platformBounds.add(new PVector(400, 380));
+  platformBounds.add(new PVector(500, 380));
+  platformBounds.add(new PVector(500, 420));
+  platformBounds.add(new PVector(400, 420));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
   ArrayList<PVector> endBounds = new ArrayList<PVector>();

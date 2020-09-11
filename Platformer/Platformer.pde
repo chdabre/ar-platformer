@@ -343,15 +343,15 @@ ArrayList<WorldObject> buildLevel1() {
   ArrayList<PVector> platformBounds = new ArrayList<PVector>();
   platformBounds.add(new PVector(400, 300));
   platformBounds.add(new PVector(500, 300));
-  platformBounds.add(new PVector(500, 340));
-  platformBounds.add(new PVector(400, 340));
+  platformBounds.add(new PVector(500, 320));
+  platformBounds.add(new PVector(400, 320));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
   ArrayList<PVector> endBounds = new ArrayList<PVector>();
-  endBounds.add(new PVector(450, 400));
-  endBounds.add(new PVector(470, 400));
-  endBounds.add(new PVector(470, 450));
-  endBounds.add(new PVector(450, 450));
+  endBounds.add(new PVector(450, 270));
+  endBounds.add(new PVector(470, 270));
+  endBounds.add(new PVector(470, 300));
+  endBounds.add(new PVector(450, 300));
   level.add(new WorldObject(WorldObject.TYPE_END, endBounds, false));
 
   player = new Player(new PVector(250, 200));

@@ -348,8 +348,8 @@ ArrayList<WorldObject> buildLevel1() {
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
   ArrayList<PVector> endBounds = new ArrayList<PVector>();
-  endBounds.add(new PVector(450, 270));
-  endBounds.add(new PVector(470, 270));
+  endBounds.add(new PVector(450, 250));
+  endBounds.add(new PVector(470, 250));
   endBounds.add(new PVector(470, 300));
   endBounds.add(new PVector(450, 300));
   level.add(new WorldObject(WorldObject.TYPE_END, endBounds, false));

@@ -38,7 +38,7 @@ class WorldObject { //<>//
         fill(0, 0, 0);
         //texture(doorTexture);
       } else if (this.type == TYPE_END) {
-        fill(0, 0, 255);
+        fill(0, 0, 0);
         //texture(doorTexture);
       } else if (this.type == TYPE_MARKER) {
         fill(152, 24, 25);

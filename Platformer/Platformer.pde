@@ -249,7 +249,9 @@ void levelUp() {
 
   if (level == 1) {
     currentLevel = buildLevel1();
-  } else {
+  } else if (level == 2) {
+    currentLevel = buildLevel2();
+  }else {
     println("no more levels");
     state = STATE_ENDSCREEN;
     mqttClient.publish(stateTopic, stateNames[state]);
@@ -317,6 +319,50 @@ ArrayList<WorldObject> buildLevel0() {
 }
 
 ArrayList<WorldObject> buildLevel1() {
+  ArrayList<WorldObject> level = new ArrayList<WorldObject>();
+
+  ArrayList<PVector> leftWallBounds = new ArrayList<PVector>();
+  leftWallBounds.add(new PVector(0, height));
+  leftWallBounds.add(new PVector(-10, height));
+  leftWallBounds.add(new PVector(-10, 0));
+  leftWallBounds.add(new PVector(0, 0));
+  level.add(new WorldObject(WorldObject.TYPE_WALL, leftWallBounds, true));
+
+  ArrayList<PVector> rightWallBounds = new ArrayList<PVector>();
+  rightWallBounds.add(new PVector(width, height));
+  rightWallBounds.add(new PVector(width+10, height));
+  rightWallBounds.add(new PVector(width+10, 0));
+  rightWallBounds.add(new PVector(width, 0));
+  level.add(new WorldObject(WorldObject.TYPE_WALL, rightWallBounds, true));
+
+  ArrayList<PVector> floorBounds = new ArrayList<PVector>();
+  floorBounds.add(new PVector(0, height));
+  floorBounds.add(new PVector(width, height));
+  floorBounds.add(new PVector(width, height-80));
+  floorBounds.add(new PVector(0, height-80));
+  level.add(new WorldObject(WorldObject.TYPE_PLATFORM, floorBounds, true));
+
+  ArrayList<PVector> platformBounds = new ArrayList<PVector>();
+  platformBounds.add(new PVector(700, 270));
+  platformBounds.add(new PVector(800, 270));
+  platformBounds.add(new PVector(800, 290));
+  platformBounds.add(new PVector(700, 290));
+  level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
+
+  ArrayList<PVector> endBounds = new ArrayList<PVector>();
+  endBounds.add(new PVector(750, 220));
+  endBounds.add(new PVector(770, 220));
+  endBounds.add(new PVector(770, 270));
+  endBounds.add(new PVector(750, 270));
+  level.add(new WorldObject(WorldObject.TYPE_END, endBounds, false));
+
+  player = new Player(new PVector(250, 200));
+
+  return level;
+}
+
+
+ArrayList<WorldObject> buildLevel2() {
   ArrayList<WorldObject> level = new ArrayList<WorldObject>();
 
   ArrayList<PVector> leftWallBounds = new ArrayList<PVector>();

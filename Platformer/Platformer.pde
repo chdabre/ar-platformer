@@ -392,12 +392,12 @@ ArrayList<WorldObject> buildLevel2() {
   platformBounds.add(new PVector(800, 290));
   platformBounds.add(new PVector(700, 290));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
-
+  
   ArrayList<PVector> endBounds = new ArrayList<PVector>();
-  endBounds.add(new PVector(750, 220));
-  endBounds.add(new PVector(770, 220));
-  endBounds.add(new PVector(770, 270));
-  endBounds.add(new PVector(750, 270));
+  endBounds.add(new PVector(250, 120));
+  endBounds.add(new PVector(290, 120));
+  endBounds.add(new PVector(290, 170));
+  endBounds.add(new PVector(250, 170));
   level.add(new WorldObject(WorldObject.TYPE_END, endBounds, false));
 
   player = new Player(new PVector(250, 200));

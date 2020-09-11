@@ -403,7 +403,7 @@ ArrayList<WorldObject> buildLevel2() {
   endBounds.add(new PVector(250, 170));
   level.add(new WorldObject(WorldObject.TYPE_END, endBounds, false));
 
-  player = new Player(new PVector(250, 200));
+  player = new Player(new PVector(250, 300));
 
   return level;
 }

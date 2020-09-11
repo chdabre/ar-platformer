@@ -276,6 +276,7 @@ void messageReceived(String topic, byte[] payload) {
 }
 
 ArrayList<WorldObject> buildLevel0() {
+  print("LEVEL 0");
   ArrayList<WorldObject> level = new ArrayList<WorldObject>();
 
   ArrayList<PVector> leftWallBounds = new ArrayList<PVector>();
@@ -319,6 +320,7 @@ ArrayList<WorldObject> buildLevel0() {
 }
 
 ArrayList<WorldObject> buildLevel1() {
+  print("LEVEL 1");
   ArrayList<WorldObject> level = new ArrayList<WorldObject>();
 
   ArrayList<PVector> leftWallBounds = new ArrayList<PVector>();
@@ -349,12 +351,12 @@ ArrayList<WorldObject> buildLevel1() {
   platformBounds.add(new PVector(700, 290));
   level.add(new WorldObject(WorldObject.TYPE_PLATFORM, platformBounds, true));
 
-  ArrayList<PVector> endBounds = new ArrayList<PVector>();
-  endBounds.add(new PVector(750, 200));
-  endBounds.add(new PVector(790, 200));
-  endBounds.add(new PVector(790, 270));
-  endBounds.add(new PVector(750, 270));
-  level.add(new WorldObject(WorldObject.TYPE_DOOR, endBounds, false));
+  ArrayList<PVector> door = new ArrayList<PVector>();
+  door.add(new PVector(750, 200));
+  door.add(new PVector(790, 200));
+  door.add(new PVector(790, 270));
+  door.add(new PVector(750, 270));
+  level.add(new WorldObject(WorldObject.TYPE_DOOR, door, false));
 
   player = new Player(new PVector(250, 200));
 
@@ -363,6 +365,7 @@ ArrayList<WorldObject> buildLevel1() {
 
 
 ArrayList<WorldObject> buildLevel2() {
+  print("LEVEL 2");
   ArrayList<WorldObject> level = new ArrayList<WorldObject>();
 
   ArrayList<PVector> leftWallBounds = new ArrayList<PVector>();

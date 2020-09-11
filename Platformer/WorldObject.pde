@@ -36,10 +36,10 @@ class WorldObject { //<>//
         //texture(platformTexture);
       } else if (this.type == TYPE_DOOR) {
         fill(0, 0, 0);
-        texture(doorTexture);
+        //texture(doorTexture);
       } else if (this.type == TYPE_END) {
         fill(0, 0, 255);
-        texture(doorTexture);
+        //texture(doorTexture);
       } else if (this.type == TYPE_MARKER) {
         fill(152, 24, 25);
       } else if (this.type == TYPE_WALL) {

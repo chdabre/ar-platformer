@@ -65,7 +65,7 @@ void setup() {
   endScreen = loadImage("end_screen.png");
   passwordScreen = loadImage("password_screen.png");
   bgImage = loadImage("bg.png");
-  editImage = loadImage("edit.png");
+  editImage = loadImage("editneu2024.png");
 
   println("Ready: " + width + "x" + height);
   setupGame();

@@ -249,8 +249,8 @@ void levelUp() {
 
   if (level == 1) {
     currentLevel = buildLevel1();
-  } else if (level == 2) {
-    currentLevel = buildLevel2();
+  // } else if (level == 2) {
+  //   currentLevel = buildLevel2();
   }else {
     println("no more levels");
     state = STATE_ENDSCREEN;

@@ -104,7 +104,7 @@ void draw() {
     PImage currentFrame = markerDetection.getCorrectedFrame();
     //image(currentFrame, 0, 0, currentFrame.width/4, currentFrame.height/4);
 
-    //image(editImage, 0, 0, width, height);
+    image(editImage, 0, 0, width, height);
 
     if (markerObjects.size() > 0) {
       for (WorldObject markerObject : markerObjects ) {
